@@ -1,6 +1,6 @@
 export const tips: Record<string, string> = {
-  '01': "DRY原則（Don\\'t Repeat Yourself）を意識しよう",
-  '02': "TDA原則（Tell, Don\\'t Ask）を意識しよう",
+  '01': "DRY原則（Don't Repeat Yourself）を意識しよう",
+  '02': "TDA原則（Tell, Don't Ask）を意識しよう",
   '03': 'ETC原則（Easier To Change）を意識しよう',
   '04': '単一責任の原則を意識しよう',
   '05': 'ユニットテストを書こう',

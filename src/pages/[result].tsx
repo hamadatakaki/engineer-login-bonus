@@ -1,10 +1,11 @@
 import { Geist, Geist_Mono } from 'next/font/google';
-import { ClipboardCopy } from 'lucide-react';
+import { ArrowLeft, ClipboardCopy } from 'lucide-react';
 import { tips } from '@/utils/data';
 import toast, { Toaster } from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -22,6 +23,7 @@ type Props = {
 
 export default function ResultPage({ result }: Props) {
   const [url, setUrl] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -37,6 +39,10 @@ export default function ResultPage({ result }: Props) {
       console.error(err);
       toast.error('コピーに失敗しました');
     }
+  };
+
+  const handleClick = () => {
+    router.push('/');
   };
 
   const previewTitle = `エンジニア向けのおみくじ（${result}）`;
@@ -55,7 +61,14 @@ export default function ResultPage({ result }: Props) {
       <div
         className={`${geistSans.className} ${geistMono.className} font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20`}
       >
-        <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+        <main className="flex flex-row gap-[32px] row-start-2 items-center sm:items-start">
+          <button onClick={handleClick}>
+            <div className="flex items-center gap-2 text-xl text-gray-600 bg-gray-100 hover:bg-gray-300 rounded-full px-2 py-2">
+              <div className="p-2 rounded-full transition">
+                <ArrowLeft className="w-8 h-8 text-gray-600" />
+              </div>
+            </div>
+          </button>
           <button onClick={handleCopy}>
             <div className="flex items-center gap-2 text-xl text-gray-600 bg-gray-100 hover:bg-gray-300 rounded-full px-6 py-2">
               {tips[result]}
