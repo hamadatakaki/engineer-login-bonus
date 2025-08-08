@@ -39,13 +39,15 @@ export default function ResultPage({ result }: Props) {
     }
   };
 
+  const previewTitle = `エンジニア向けのおみくじ（${result}）`;
+
   return (
     <>
       <Head>
         <title>{tips[result]}</title>
 
-        <meta property="og:title" content={tips[result]} />
-        <meta property="og:description" content="エンジニア向けのおみくじ" />
+        <meta property="og:title" content={previewTitle} />
+        <meta property="og:description" content={tips[result]} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={url} />
       </Head>
