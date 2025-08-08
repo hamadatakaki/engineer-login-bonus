@@ -1,10 +1,10 @@
 import { Geist, Geist_Mono } from 'next/font/google';
 import { ClipboardCopy } from 'lucide-react';
 import { tips } from '@/utils/data';
-import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -16,10 +16,11 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-export default function ResultPage() {
-  const router = useRouter();
-  const result = router.query.result as string;
+type Props = {
+  result: string;
+};
 
+export default function ResultPage({ result }: Props) {
   const [url, setUrl] = useState('');
 
   useEffect(() => {
@@ -67,3 +68,22 @@ export default function ResultPage() {
     </>
   );
 }
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = Object.keys(tips).map(key => ({
+    params: { result: key },
+  }));
+  return {
+    paths,
+    fallback: false, // それ以外のパラメータは404
+  };
+};
+
+export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+  const result = params?.result as string;
+  return {
+    props: {
+      result,
+    },
+  };
+};
