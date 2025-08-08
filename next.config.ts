@@ -1,7 +1,10 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
+
+const isGitHubPages = process.env.DEPLOY_ENV === 'GH_PAGES';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  assetPrefix: isGitHubPages ? '/engineer-login-bonus' : '',
+  basePath: isGitHubPages ? '/engineer-login-bonus' : '',
   reactStrictMode: true,
 };
 
