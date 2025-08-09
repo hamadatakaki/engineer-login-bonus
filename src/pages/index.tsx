@@ -3,6 +3,7 @@ import { NotebookText } from 'lucide-react';
 import { tips } from '@/utils/data';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -35,21 +36,30 @@ export default function IndexPage() {
   };
 
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20`}
-    >
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        {key != null && (
-          <button onClick={handleClick}>
-            <div className="flex items-center gap-2 text-xl text-gray-600 bg-gray-100 hover:bg-gray-300 rounded-full px-6 py-2">
-              おみくじを引く
-              <div className="p-2 rounded-full transition">
-                <NotebookText className="w-8 h-8 text-gray-600" />
+    <>
+      <Head>
+        <title>エンジニア向けのおみくじ</title>
+
+        <meta property="og:title" content="エンジニア向けのおみくじ" />
+        <meta property="og:description" content="今日1日の目標を決めよう" />
+        <meta property="og:type" content="website" />
+      </Head>
+      <div
+        className={`${geistSans.className} ${geistMono.className} font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20`}
+      >
+        <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+          {key != null && (
+            <button onClick={handleClick}>
+              <div className="flex items-center gap-2 text-xl text-gray-600 bg-gray-100 hover:bg-gray-300 rounded-full px-6 py-2">
+                おみくじを引く
+                <div className="p-2 rounded-full transition">
+                  <NotebookText className="w-8 h-8 text-gray-600" />
+                </div>
               </div>
-            </div>
-          </button>
-        )}
-      </main>
-    </div>
+            </button>
+          )}
+        </main>
+      </div>
+    </>
   );
 }
